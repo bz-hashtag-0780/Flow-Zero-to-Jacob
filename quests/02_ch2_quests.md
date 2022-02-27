@@ -7,10 +7,10 @@
 - Inside that contract, declare a constant variable named is, and make it have type String. 
 - Initialize it to "the best" when your contract gets deployed.
 
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q1.png" alt="drawing" width="150"/>
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q1.png" alt="drawing" width="600"/>
 
 ## Chapter 2 Day 1 Quest 2: Check that your variable is actually equals "the best".
 - Check that your variable is actually equals "the best" by executing a script to read that variable. 
 - Include a screenshot of the output.
 
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q2.png" alt="drawing" width="150"/>
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q2.png" alt="drawing" width="600"/>
