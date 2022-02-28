@@ -70,7 +70,7 @@ pub contract Test {
 
 ## Chapter 3 Day 2
 
-### CH3D2 Quest 6: Write your own smart contract that contains two state variables: an array of resources, and a dictionary of resources. Add functions to remove and add to each of them. They must be different from the examples.
+### CH3D2 Quest 1: Write your own smart contract that contains two state variables: an array of resources, and a dictionary of resources. Add functions to remove and add to each of them. They must be different from the examples.
 
 #### Resource
 ```swift
@@ -233,3 +233,73 @@ access(all) contract BasicBeast {
 }
 
 ```
+
+## Chapter 3 Day 3
+
+### CH3D3 Quest 1: Define your own contract that stores a dictionary of resources. Add a function to get a reference to one of the resources in the dictionary.
+
+```swift
+pub contract BasicBeast {
+
+    pub var totalSupply: UInt64
+
+    pub var dictionaryOfBeasts: @{UInt64: Beast}
+
+    pub resource Beast {
+        pub let id: UInt64
+        pub let name: String
+
+        init(name: String) {
+            self.name = name
+
+            // Increment the global Beast IDs
+            BasicBeast.totalSupply = BasicBeast.totalSupply + 1
+
+            // Set unique Beast ID to the newly incremented totalSupply
+            self.id = BasicBeast.totalSupply
+        }
+    }
+
+    pub fun getReference(key: UInt64): &Beast {
+        return &self.dictionaryOfBeasts[key] as &Beast
+    }
+
+    init() {
+        self.totalSupply = 0
+
+        self.dictionaryOfBeasts <- {
+            1: <- create Beast(name: "Moon"), 
+            2: <- create Beast(name: "Saber")
+        }
+    }
+    
+}
+```
+
+### CH3D3 Quest 2: Create a script that reads information from that resource using the reference from the function you defined in part 1.
+
+#### Script
+```swift
+import BasicBeast from 0x04
+
+pub fun main(): String {
+  let ref = BasicBeast.getReference(key: 2)
+  return ref.name
+}
+```
+#### Result
+```swift 
+22:25:35 read resource Result
+{"type":"String","value":"Moon"}
+
+22:25:45 read resource Result
+{"type":"String","value":"Saber"}
+```
+
+### CH3D3 Quest 3: Explain, in your own words, why references can be useful in Cadence.
+
+We want to use references because moving a resource just to read or update its data is a pain in the ass.
+
+
+<img src="https://media1.giphy.com/media/3og0IPNLPWSLR0gaxW/giphy.gif" alt="drawing" width="600"/>
+
