@@ -17,6 +17,8 @@
 
 <img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q2.png" alt="drawing" width="600"/>
 
+## Chapter 2 Day 2
+
 ### CH2D2 Quest 1: Explain why we wouldn't call changeGreeting in a script
 
 changeGreeting is a function to modify data which requires running a transaction whereas scripts are used solely for reading data
@@ -50,6 +52,7 @@ Transaction for call updateMyNumber function
 <img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D2Q4.4.png" alt="drawing" width="600"/>
 Check if function works.
 
+## Chapter 2 Day 3
 
 ### CH2D3 Quest 1: In a script, initialize an array (that has length == 3) of your favourite people, represented as `String`s, and `log` it.
 
@@ -76,6 +79,8 @@ When dictionaries are accessed, the values returned are optionals. Meaning it mi
 It should look like the following
 
 <img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D3Q4.png" alt="drawing" width="600" />
+
+## Chapter 2 Day 4
 
 ### CH2D4 Quest 1: Deploy a new contract that has a Struct of your choosing inside of it (must be different than Profile).
 
