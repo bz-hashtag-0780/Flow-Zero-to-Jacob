@@ -34,12 +34,14 @@ Execute phase: To call functions
   - A variable named myNumber that has type Int (set it to 0 when the contract is deployed)
   - A function named updateMyNumber that takes in a new number named newNumber as a parameter that has type Int and updates myNumber to be newNumber
 
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q4.1.png" alt="drawing" width="600"/>
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D2Q4.1.png" alt="drawing" width="600"/>
 
 - Add a script that reads myNumber from the contract
 - Add a transaction that takes in a parameter named myNewNumber and passes it into the updateMyNumber function. Verify that your number changed by running the script again.
 
-
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q4.2.png" alt="drawing" width="600"/>
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q4.3.png" alt="drawing" width="600"/>
-<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D1Q4.4.png" alt="drawing" width="600"/>
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D2Q4.2.png" alt="drawing" width="600"/>
+Script to read myNumber
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D2Q4.3.png" alt="drawing" width="600"/>
+Transaction for call updateMyNumber function
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D2Q4.4.png" alt="drawing" width="600"/>
+Check if function works.
