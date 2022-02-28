@@ -74,3 +74,91 @@ When dictionaries are accessed, the values returned are optionals. Meaning it mi
 It should look like the following
 
 <img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D3Q4.png" alt="drawing" width="600" />
+
+## Chapter 2 Day 4 Quest 1: Deploy a new contract that has a Struct of your choosing inside of it (must be different than Profile).
+
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D4Q1.png" alt="drawing" width="600" />
+
+## Chapter 2 Day 4 Quest 2: Create a dictionary or array that contains the Struct you defined.
+
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D4Q2.png" alt="drawing" width="600" />
+
+## Chapter 2 Day 4 Quest 3: Create a function to add to that array/dictionary.
+
+<img src="https://raw.githubusercontent.com/bz-hashtag-0780/Flow-Zero-to-Jacob/main/quests/screenshots/CH2D4Q3.png" alt="drawing" width="600" />
+
+## Chapter 2 Day 4 Quest 4: Add a transaction to call that function in step 3.
+
+```swift
+import BasicBeast from 0x02
+
+transaction(dexNumber: UInt32, name: String) {
+    
+    let currentBeastTemplateID: UInt32
+
+    prepare(acct: AuthAccount) {
+        self.currentBeastTemplateID = BasicBeast.nextBeastTemplateID;
+      }
+
+    execute {
+        BasicBeast.createBeastTemplate(dexNumber: dexNumber, name: name)
+    }
+
+    post {
+        BasicBeast.getBeastTemplate(beastTemplateID: self.currentBeastTemplateID) != nil:
+            "BeastTemplate doesn't exist"
+    }
+}
+```
+
+## Chapter 2 Day 4 Quest 5: Add a script to read the Struct you defined.
+
+```swift
+import BasicBeast from 0x02
+
+pub fun main(beastTemplateID: UInt32): BasicBeast.BeastTemplate {
+
+    let beastTemplate = BasicBeast.getBeastTemplate(beastTemplateID: beastTemplateID)
+        ?? panic("BeastTemplate doesn't exist")
+
+    return beastTemplate
+}
+```
+
+### Running the script
+
+```swift
+17:58:07 get beast template Result:
+{"type":"Struct","value":
+  {"id":"A.0000000000000002.BasicBeast.BeastTemplate","fields":
+    [
+        {"name":"beastTemplateID","value":
+           {"type":"UInt32","value":"1"}
+        },
+        {"name":"dexNumber","value":
+          {"type":"UInt32","value":"1"}
+        },
+        {"name":"name","value":
+          {"type":"String","value":"Moon"}
+         }
+      ]
+    }
+ }
+
+17:58:11 get beast template Result:
+{"type":"Struct","value":
+  {"id":"A.0000000000000002.BasicBeast.BeastTemplate","fields":
+    [
+       {"name":"beastTemplateID","value":
+          {"type":"UInt32","value":"2"}
+        },
+       {"name":"dexNumber","value":
+          {"type":"UInt32","value":"2"}
+        },
+       {"name":"name","value":
+          {"type":"String","value":"Saber"}
+        }
+     ]
+   }
+}
+```
