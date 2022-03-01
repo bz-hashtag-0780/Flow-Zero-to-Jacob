@@ -10,7 +10,7 @@ Inside an account you can deploy `contract code` and you can deploy multiple sma
 ### CH4D1 Quest 2: What is the difference between the `/storage/`, `/public/`, and `/private/` paths?
 `/storage/` can only be accessed by the account owner
 `/public/` is available to everyone
-`/private/` is available to the account owner and other accounts that the account owner gives access to
+`/private/` is available to the account owner and other accounts that the account owner has given access to
 
 ### CH4D1 Quest 3: What does `.save()` do? What does `.load()` do? What does `.borrow()` do?
 
