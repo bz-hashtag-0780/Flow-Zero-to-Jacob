@@ -300,6 +300,172 @@ pub fun main(): String {
 
 We want to use references because moving a resource just to read or update its data is a pain in the ass.
 
+## Chapter 3 Day 4
+
+### CH3D4 Quest 1: Explain, in your own words, the 2 things resource interfaces can be used for (we went over both in today's content)
+1. Interfaces are used as requirements. When an interface is implemented by a resource, the resource must conform to the interface's fields and functions.
+2. Interfaces are used to expose stuff. Using interfaces makes it possible to expose only some functions to a certain user.
+
+### CH3D4 Quest 2: Define your own contract. Make your own resource interface and a resource that implements the interface. Create 2 functions. In the 1st function, show an example of not restricting the type of the resource and accessing its content. In the 2nd function, show an example of restricting the type of the resource and NOT being able to access its content.
+
+
+
+### CH3D4 Quest 3: How would we fix this code? 
+
+```swift
+pub contract Stuff {
+
+    pub struct interface ITest {
+      pub var greeting: String
+      pub var favouriteFruit: String
+    }
+
+    // ERROR:
+    // `structure Stuff.Test does not conform 
+    // to structure interface Stuff.ITest`
+    pub struct Test: ITest {
+      pub var greeting: String
+
+      pub fun changeGreeting(newGreeting: String): String {
+        self.greeting = newGreeting
+        return self.greeting // returns the new greeting
+      }
+
+      init() {
+        self.greeting = "Hello!"
+      }
+    }
+
+    pub fun fixThis() {
+      let test: Test{ITest} = Test()
+      let newGreeting = test.changeGreeting(newGreeting: "Bonjour!") // ERROR HERE: `member of restricted type is not accessible: changeGreeting`
+      log(newGreeting)
+    }
+}
+```
+
+#### The fix
+
+```swift
+pub contract Stuff {
+
+    pub struct interface ITest {
+      pub var greeting: String
+      pub var favouriteFruit: String
+      pub fun changeGreeting(newGreeting: String): String // Add this to make the function accessible
+    }
+
+    // ERROR FIXED
+    pub struct Test: ITest {
+      pub var greeting: String
+      pub var favouriteFruit: String // Add this to conform to the ITest interface
+
+      pub fun changeGreeting(newGreeting: String): String {
+        self.greeting = newGreeting
+        return self.greeting // returns the new greeting
+      }
+
+      init() {
+        self.greeting = "Hello!"
+        self.favouriteFruit = "Bacon" // Initialize
+      }
+    }
+
+    pub fun fixThis() {
+      let test: Test{ITest} = Test()
+      let newGreeting = test.changeGreeting(newGreeting: "Bonjour!") // ERROR FIXED
+      log(newGreeting)
+    }
+}
+```
+
+## Chapter 3 Day 5
+
+### CH3D5 Quest 1: For today's quest, you will be looking at a contract and a script. You will be looking at 4 variables (a, b, c, d) and 3 functions (publicFunc, contractFunc, privateFunc) defined in `SomeContract`. In each AREA (1, 2, 3, and 4), I want you to do the following: for each variable (a, b, c, and d), tell me in which areas they can be read (read scope) and which areas they can be modified (write scope). For each function (publicFunc, contractFunc, and privateFunc), simply tell me where they can be called.
+
+```swift
+access(all) contract SomeContract {
+    pub var testStruct: SomeStruct
+
+    pub struct SomeStruct {
+
+        //
+        // 4 Variables
+        //
+
+        pub(set) var a: String
+
+        pub var b: String
+
+        access(contract) var c: String
+
+        access(self) var d: String
+
+        //
+        // 3 Functions
+        //
+
+        pub fun publicFunc() {}
+
+        access(contract) fun contractFunc() {}
+
+        access(self) fun privateFunc() {}
+
+
+        pub fun structFunc() {
+            /**************/
+            /*** AREA 1 ***/
+            /**************/
+        }
+
+        init() {
+            self.a = "a"
+            self.b = "b"
+            self.c = "c"
+            self.d = "d"
+        }
+    }
+
+    pub resource SomeResource {
+        pub var e: Int
+
+        pub fun resourceFunc() {
+            /**************/
+            /*** AREA 2 ***/
+            /**************/
+        }
+
+        init() {
+            self.e = 17
+        }
+    }
+
+    pub fun createSomeResource(): @SomeResource {
+        return <- create SomeResource()
+    }
+
+    pub fun questsAreFun() {
+        /**************/
+        /*** AREA 3 ****/
+        /**************/
+    }
+
+    init() {
+        self.testStruct = SomeStruct()
+    }
+}
+```
+
+This is a script that imports the contract above:
+```swift
+import SomeContract from 0x01
+
+pub fun main() {
+  /**************/
+  /*** AREA 4 ***/
+  /**************/
+}
+```
 
 <img src="https://media1.giphy.com/media/3og0IPNLPWSLR0gaxW/giphy.gif" alt="drawing" width="600"/>
 
