@@ -308,7 +308,62 @@ We want to use references because moving a resource just to read or update its d
 
 ### CH3D4 Quest 2: Define your own contract. Make your own resource interface and a resource that implements the interface. Create 2 functions. In the 1st function, show an example of not restricting the type of the resource and accessing its content. In the 2nd function, show an example of restricting the type of the resource and NOT being able to access its content.
 
+```swift
+pub contract BasicBeast {
 
+    pub var totalSupply: UInt64
+
+    pub resource interface IBeast {
+        pub let id: UInt64
+        pub let name: String
+        pub var nickname: String
+    }
+
+    pub resource Beast: IBeast {
+        pub let id: UInt64
+        pub let name: String
+        pub var nickname: String
+
+        init(name: String) {
+            self.name = name
+
+            self.nickname = ""
+
+            // Increment the global Beast IDs
+            BasicBeast.totalSupply = BasicBeast.totalSupply + 1
+
+            // Set unique Beast ID to the newly incremented totalSupply
+            self.id = BasicBeast.totalSupply
+        }
+
+        pub fun changeNickname(nickname: String) {
+            self.nickname = nickname
+        }
+    }
+
+    pub fun updateNicknameWithoutInterface() {
+        let beast: @Beast <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    // Restricted
+    pub fun updateNicknameInterface() {
+      let beast: @Beast{IBeast} <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    init() {
+        self.totalSupply = 0
+    }
+    
+}
+```
 
 ### CH3D4 Quest 3: How would we fix this code? 
 
@@ -416,6 +471,15 @@ access(all) contract SomeContract {
             /**************/
             /*** AREA 1 ***/
             /**************/
+            
+            // a: read and write
+            // b: read and write
+            // c: read and write
+            // d: read and write
+            
+            // publicFunc() can be called here
+            // contractFunc() can be called here
+            // privateFunc() can be called here
         }
 
         init() {
@@ -433,6 +497,14 @@ access(all) contract SomeContract {
             /**************/
             /*** AREA 2 ***/
             /**************/
+            
+            // a: read and write
+            // b: read
+            // c: read
+            // d: no access
+            
+            // publicFunc() can be called here
+            // contractFunc() can be called here
         }
 
         init() {
@@ -448,6 +520,14 @@ access(all) contract SomeContract {
         /**************/
         /*** AREA 3 ****/
         /**************/
+        
+        // a: read and write
+        // b: read
+        // c: read
+        // d: no access
+        
+        // publicFunc() can be called here
+        // contractFunc() can be called here
     }
 
     init() {
@@ -464,6 +544,13 @@ pub fun main() {
   /**************/
   /*** AREA 4 ***/
   /**************/
+  
+    // a: read and write
+    // b: read
+    // c: no access
+    // d: no access
+    
+    // publicFunc() can be called here
 }
 ```
 
