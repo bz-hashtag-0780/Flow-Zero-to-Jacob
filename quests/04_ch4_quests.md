@@ -1,0 +1,32 @@
+# 04 - Chapter 4 Quests
+
+<img src="https://i1.sndcdn.com/avatars-000815375770-jgmur7-t500x500.jpg" alt="drawing" width="150"/>
+
+## Chapter 4 Day 1
+
+### CH4D1 Quest 1: Explain what lives inside of an account. 
+Inside an account you can deploy `contract code` and you can deploy multiple smart contracts to the same account. An account also has an `account storage` to store all of its data.
+
+### CH4D1 Quest 2: What is the difference between the `/storage/`, `/public/`, and `/private/` paths?
+`/storage/` can only be accessed by the account owner
+`/public/` is available to everyone
+`/private/` is available to the account owner and other accounts that the account owner gives access to
+
+### CH4D1 Quest 3: What does `.save()` do? What does `.load()` do? What does `.borrow()` do?
+
+
+
+### CH4D1 Quest 4: Explain why we couldn't save something to our account storage inside of a script.
+
+
+
+### CH4D1 Quest 5: Explain why I couldn't save something to your account.
+
+
+
+### CH4D1 Quest 6: Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
+
+    1) A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
+
+    2) A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
+    
