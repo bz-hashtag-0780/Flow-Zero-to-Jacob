@@ -275,7 +275,11 @@ pub contract Test: ITest { //Make sure the contract actually implements the ITes
 
 ### CH5D3 Quest 1: What does "force casting" with `as!` do? Why is it useful in our Collection?
 
+It helps us make sure only a specific type of resource can be stored into our collection.
+
 ### CH5D3 Quest 2: What does `auth` do? When do we use it?
+
+`auth` reference is what we must use in order to get a reference of a downcasted type.
 
 ### CH5D3 Quest 3: This last quest will be your most difficult yet. Take this contract:
 
@@ -363,4 +367,4 @@ pub contract CryptoPoops: NonFungibleToken {
 
 and add a function called `borrowAuthNFT` just like we did in the section called "The Problem" above. Then, find a way to make it publically accessible to other people so they can read our NFT's metadata. Then, run a script to display the NFTs metadata for a certain `id`.
 
-You will have to write all the transactions to set up the accounts, mint the NFTs, and then the scripts to read the NFT's metadata. We have done most of this in the chapters up to this point, so you can look for help there :)
+You will have to write all the transactions to set up the accounts, mint the NFTs, and then the scripts to read the NFT's metadata.
