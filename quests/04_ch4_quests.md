@@ -223,3 +223,50 @@ pub contract BasicBeast {
     
 }
 ```
+#### Transaction save and link resource with a restrictive interface
+```swift
+import BasicBeast from 0x05
+
+transaction(name: String) {
+
+  prepare(signer: AuthAccount) {
+
+    // Save the resource to account storage
+    signer.save(<- BasicBeast.createBeast(name: name), to: /storage/MyBeastStorage)
+
+    // link the resource from the account storage
+    signer.link<&BasicBeast.Beast{BasicBeast.IBeast}>(/public/MyBeastStorage, target: /storage/MyBeastStorage)
+                  ?? panic("A `@BasicBeast.Beast` resource does not exist")
+  }
+
+  execute {}
+}
+```
+#### Script with error that can't access restricted field `name`
+```swift
+import BasicBeast from 0x05
+
+pub fun main(address: Address): String {
+
+  let publicCapability: Capability<&BasicBeast.Beast{BasicBeast.IBeast}> =
+    getAccount(address).getCapability<&BasicBeast.Beast{BasicBeast.IBeast}>(/public/MyBeastStorage)
+
+  let beast: &BasicBeast.Beast{BasicBeast.IBeast} = publicCapability.borrow() ?? panic("The capability doesn't exist or you did not specify the right type when you got the capability.")
+
+  return beast.name // ERROR: member of restricted type is not accessible: name
+}
+```
+#### Script that can access a non-restricted field `id`
+```swift
+import BasicBeast from 0x05
+
+pub fun main(address: Address): UInt64 {
+
+  let publicCapability: Capability<&BasicBeast.Beast{BasicBeast.IBeast}> =
+    getAccount(address).getCapability<&BasicBeast.Beast{BasicBeast.IBeast}>(/public/MyBeastStorage)
+
+  let beast: &BasicBeast.Beast{BasicBeast.IBeast} = publicCapability.borrow() ?? panic("The capability doesn't exist or you did not specify the right type when you got the capability.")
+
+  return beast.id
+}
+```
