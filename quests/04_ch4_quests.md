@@ -24,7 +24,7 @@ Because you need to sign an transaction as the AuthAccount to get access to the 
 
 ### CH4D1 Quest 5: Explain why I couldn't save something to your account.
 
-Because I need to sign a transaction for you to be able to do so or sign an transaction that gives you the capability to save something to my `account storage`
+Because I need to sign a transaction in order to to do so or sign an transaction that gives you the capability to save something to my `account storage`
 
 ### CH4D1 Quest 6: Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
 
@@ -141,4 +141,22 @@ transaction(name: String) {
 
   }
 }
+```
+## Chapter 4 Day 2
+
+### CH4D2 Quest 1: What does `.link()` do?
+
+It links a capability for some data to either the /public/ or /private/ path so others can access the data.
+
+### CH4D2 Quest 2: In your own words (no code), explain how we can use resource interfaces to only expose certain things to the `/public/` path.
+
+Resource interfaces can expose certain things to the `/public/` path by only exposing certain functions in the interface.
+
+### CH4D2 Quest 3: Deploy a contract that contains a resource that implements a resource interface. Then, do the following:
+
+    1) In a transaction, save the resource to storage and link it to the public with the restrictive interface. 
+
+    2) Run a script that tries to access a non-exposed field in the resource interface, and see the error pop up.
+
+    3) Run the script and access something you CAN read from. Return it from the script.
 
