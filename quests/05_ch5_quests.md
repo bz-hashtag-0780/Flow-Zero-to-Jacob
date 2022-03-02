@@ -557,7 +557,7 @@ pub contract CryptoPoops: NonFungibleToken {
     self.account.save(<- create Minter(), to: /storage/Minter)
   }
 }
-
+```
 
 #### Transaction mint NFT 
 ```swift
