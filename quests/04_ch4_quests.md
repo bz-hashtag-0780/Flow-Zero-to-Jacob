@@ -14,15 +14,17 @@ Inside an account you can deploy `contract code` and you can deploy multiple sma
 
 ### CH4D1 Quest 3: What does `.save()` do? What does `.load()` do? What does `.borrow()` do?
 
-
+`.save()`: To save data to an `account storage` path
+`.load()`: To load data from the `account storage`
+`.borrow()`: To get a reference to a resource in the `account storage`
 
 ### CH4D1 Quest 4: Explain why we couldn't save something to our account storage inside of a script.
 
-
+Because you need to sign an transaction as the AuthAccount to get access to the `account storage` and save something to it.
 
 ### CH4D1 Quest 5: Explain why I couldn't save something to your account.
 
-
+Because I need to sign a transaction for you to be able to do so or sign an transaction that gives you the capability to save something to my `account storage`
 
 ### CH4D1 Quest 6: Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
 
