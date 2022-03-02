@@ -160,3 +160,66 @@ Resource interfaces can expose certain things to the `/public/` path by only exp
 
     3) Run the script and access something you CAN read from. Return it from the script.
 
+#### Contract with a resource that implements an interface
+```swift
+pub contract BasicBeast {
+
+    pub var totalSupply: UInt64
+
+    pub resource interface IBeast {
+        pub let id: UInt64
+        // Restrict from accessing name
+        // pub let name: String
+        pub var nickname: String
+        pub fun changeNickname(nickname: String)
+    }
+
+    pub resource Beast: IBeast {
+        pub let id: UInt64
+        pub let name: String
+        pub var nickname: String
+
+        init(name: String) {
+            self.name = name
+
+            self.nickname = ""
+
+            // Increment the global Beast IDs
+            BasicBeast.totalSupply = BasicBeast.totalSupply + 1
+
+            // Set unique Beast ID to the newly incremented totalSupply
+            self.id = BasicBeast.totalSupply
+        }
+
+        pub fun changeNickname(nickname: String) {
+            self.nickname = nickname
+        }
+    }
+
+    pub fun updateNicknameWithoutInterface() {
+        let beast: @Beast <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    // Restricted
+    pub fun updateNicknameInterface() {
+      let beast: @Beast{IBeast} <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    pub fun createBeast(name: String): @Beast {
+    return <- create Beast(name: name)
+  }
+
+    init() {
+        self.totalSupply = 0
+    }
+    
+}
+```
