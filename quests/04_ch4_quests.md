@@ -287,3 +287,5 @@ No, a better way would be to use references
 ## Chapter 4 Day 4
 
 ### CH4D4 Quest 1: Can you brainstorm any ways to distribute Minters to other people WITHOUT having to have 2 signers, or in other words, 2 AuthAccounts?
+
+By creating a capabilitity `link()` of the 'Admin' and let the other account `borrow()` the capability to mint
