@@ -283,3 +283,7 @@ If we don't want everyone to be able to mint. We could restrict the function usi
 
 #### Idea #2: If we want to read information about our NFTs inside our Collection, right now we have to take it out of the Collection to do so. Is this good?
 No, a better way would be to use references
+
+## Chapter 4 Day 4
+
+### CH4D4 Quest 1: Can you brainstorm any ways to distribute Minters to other people WITHOUT having to have 2 signers, or in other words, 2 AuthAccounts?
