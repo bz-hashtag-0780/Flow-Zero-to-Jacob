@@ -205,3 +205,66 @@ pub contract Test {
 
 }
 ```
+
+### CH5D2 Quest 1: Explain why standards can be benefitial to the Flow ecosystem.
+
+Having standards makes it possible for many different applications to work with many types of digital assets as they all follow the same structure. It allows for scalability and helps make the ecosystem grow much faster.
+
+### CH5D2 Quest 2: What is YOUR favourite food?
+
+<img src="https://c.tenor.com/rd6D2wMN7psAAAAd/burger-food.gif" alt="drawing" width="600"/>
+
+### CH5D2 Quest 3:. Please fix this code (Hint: There are two things wrong):
+
+The contract interface:
+```swift
+pub contract interface ITest {
+  pub var number: Int
+  
+  pub fun updateNumber(newNumber: Int) {
+    pre {
+      newNumber >= 0: "We don't like negative numbers for some reason. We're mean."
+    }
+    post {
+      self.number == newNumber: "Didn't update the number to be the new number."
+    }
+  }
+
+  pub resource interface IStuff {
+    pub var favouriteActivity: String
+  }
+
+  pub resource Stuff: IStuff { //Must implement the interface
+    pub var favouriteActivity: String
+  }
+}
+```
+
+The implementing contract:
+```swift
+import ITest from 0xWherever
+
+pub contract Test: ITest { //Make sure the contract actually implements the ITest
+  pub var number: Int
+  
+  pub fun updateNumber(newNumber: Int) {
+    self.number = 5
+  }
+
+  pub resource interface IStuff {
+    pub var favouriteActivity: String
+  }
+
+  pub resource Stuff: IStuff {
+    pub var favouriteActivity: String
+
+    init() {
+      self.favouriteActivity = "Playing League of Legends."
+    }
+  }
+
+  init() {
+    self.number = 0
+  }
+}
+```
