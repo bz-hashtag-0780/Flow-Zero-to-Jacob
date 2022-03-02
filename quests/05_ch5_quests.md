@@ -279,7 +279,7 @@ It helps us make sure only a specific type of resource can be stored into our co
 
 ### CH5D3 Quest 2: What does `auth` do? When do we use it?
 
-`auth` reference is what we must use in order to get a reference of a downcasted type.
+`auth` reference is what we must use in order to get a downcasted reference.
 
 ### CH5D3 Quest 3: This last quest will be your most difficult yet. Take this contract:
 
