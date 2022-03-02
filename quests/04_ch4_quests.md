@@ -32,3 +32,113 @@ Because I need to sign a transaction for you to be able to do so or sign an tran
 
     2) A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
     
+#### Some random contract
+```swift
+pub contract BasicBeast {
+
+    pub var totalSupply: UInt64
+
+    pub resource interface IBeast {
+        pub let id: UInt64
+        pub let name: String
+        pub var nickname: String
+        pub fun changeNickname(nickname: String)
+    }
+
+    pub resource Beast: IBeast {
+        pub let id: UInt64
+        pub let name: String
+        pub var nickname: String
+
+        init(name: String) {
+            self.name = name
+
+            self.nickname = ""
+
+            // Increment the global Beast IDs
+            BasicBeast.totalSupply = BasicBeast.totalSupply + 1
+
+            // Set unique Beast ID to the newly incremented totalSupply
+            self.id = BasicBeast.totalSupply
+        }
+
+        pub fun changeNickname(nickname: String) {
+            self.nickname = nickname
+        }
+    }
+
+    pub fun updateNicknameWithoutInterface() {
+        let beast: @Beast <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    // Restricted
+    pub fun updateNicknameInterface() {
+      let beast: @Beast{IBeast} <- create Beast(name: "Moon")
+        beast.changeNickname(nickname: "New")
+        log(beast.nickname) // "New"
+
+        destroy beast
+    }
+
+    pub fun createBeast(name: String): @Beast {
+    return <- create Beast(name: name)
+  }
+
+    init() {
+        self.totalSupply = 0
+    }
+    
+}
+```
+#### Transaction 1 load()
+```swift
+import BasicBeast from 0x05
+
+transaction(name: String) {
+  prepare(signer: AuthAccount) {
+    // Save the resource to account storage
+    signer.save(<- BasicBeast.createBeast(name: name), to: /storage/MyBeastStorage)
+
+    // Load the resource from the account storage
+    let beast <- signer.load<@BasicBeast.Beast>(from: /storage/MyBeastStorage)
+                  ?? panic("A `@BasicBeast.Beast` resource does not exist")
+
+    // Log a field
+    log(beast.name)
+
+    // Destroy the bastard
+    destroy beast
+  }
+
+  execute {
+
+  }
+}
+```
+
+#### Transaction 2 borrow()
+```swift
+import BasicBeast from 0x05
+
+transaction(name: String) {
+  prepare(signer: AuthAccount) {
+    // Save the resource to account storage
+    signer.save(<- BasicBeast.createBeast(name: name), to: /storage/MyBeastStorage)
+
+    // Load the resource from the account storage
+    let beast = signer.borrow<&BasicBeast.Beast>(from: /storage/MyBeastStorage)
+                  ?? panic("A `@BasicBeast.Beast` resource does not exist")
+
+    // Log a field
+    log(beast.name)
+  }
+
+  execute {
+
+  }
+}
+
