@@ -371,7 +371,7 @@ You will have to write all the transactions to set up the accounts, mint the NFT
 
 
 #### Contract
-
+```swift
 import NonFungibleToken from 0x01
 
 pub contract CryptoPoops: NonFungibleToken {
@@ -463,6 +463,8 @@ pub contract CryptoPoops: NonFungibleToken {
     self.account.save(<- create Minter(), to: /storage/Minter)
   }
 }
+
+
 
 #### Transaction: Setup Collection
 ```swift
