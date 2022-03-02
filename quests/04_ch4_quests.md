@@ -270,3 +270,16 @@ pub fun main(address: Address): UInt64 {
   return beast.id
 }
 ```
+## Chapter 4 Day 3
+
+### CH4D3 Quest 1: What do you have to do if you have resources "nested" inside of another resource? ("Nested resources")
+
+When you have nested resources you must define a `destroy()` function so the nested resource either gets destroyed or moved when the parent resource is destroyed.
+
+### CH4D3 Quest 2: Brainstorm some extra things we may want to add to this contract. Think about what might be problematic with this contract and how we could fix it.
+
+#### Idea #1: Do we really want everyone to be able to mint an NFT?.
+If we don't want everyone to be able to mint. We could restrict the function using an interface or creating a resource where only accounts with the resource is able to call the mint function.
+
+#### Idea #2: If we want to read information about our NFTs inside our Collection, right now we have to take it out of the Collection to do so. Is this good?
+No, a better way would be to use references
