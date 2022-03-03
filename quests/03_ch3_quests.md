@@ -115,8 +115,7 @@ pub resource NFT {
     pub fun addNftToDictionary(nft: @NFT) {
         let key = nft.id
         
-        let oldNFT <- self.dictionaryOfNFTs[key] <- nft
-        destroy oldNFT
+        self.dictionaryOfNFTs[key] <-! nft
     }
 
     pub fun removeNftToDictionary(key: UInt64): @NFT {
@@ -199,8 +198,7 @@ access(all) contract BasicBeast {
     pub fun addNftToDictionary(nft: @NFT) {
         let key = nft.id
         
-        let oldNFT <- self.dictionaryOfNFTs[key] <- nft
-        destroy oldNFT
+        self.dictionaryOfNFTs[key] <-! nft
     }
 
     pub fun removeNftToDictionary(key: UInt64): @NFT {
