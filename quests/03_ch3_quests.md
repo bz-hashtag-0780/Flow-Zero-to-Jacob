@@ -543,7 +543,7 @@ pub fun main() {
   /*** AREA 4 ***/
   /**************/
   
-    // a: read and write
+    // a: read // write in a transaction but not in a script
     // b: read
     // c: no access
     // d: no access
